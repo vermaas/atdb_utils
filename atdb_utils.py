@@ -219,13 +219,17 @@ def list_dataproducts_status(taskID, status):
     # and a next page
 
 @timeit
-def change_status(taskid,status):
-    print('change_status('+taskid+','+status+')')
+def change_status(taskID,status):
+    print('change_status('+taskID+','+status+')')
+
+    ATDB_HOST = "http://atdb-test.astron.nl/atdb"
+    #taskID = '190507001'
+    #status = 'removing'
 
     from atdb_interface.atdb_interface import ATDB
-    atdb_interface = ATDB(ATDB_HOST_VM)
-    atdb_interface.do_PUT(key='observations:new_status', taskid=taskid,value=status)
-    atdb_interface.do_PUT_LIST(key='dataproducts:new_status', taskid=taskid,value=status)
+    atdb_interface = ATDB(ATDB_HOST)
+    atdb_interface.do_PUT(key='observations:new_status', taskid=taskID,value=status)
+    atdb_interface.do_PUT_LIST(key='dataproducts:new_status', taskid=taskID,value=status)
 
     # alternative method, but with an extra dependency on atdb_services
     # from atdb_services import atdb_io
