@@ -6,15 +6,9 @@
     Description: just a bunch of examples and tests of how to access ATDB from Python
 """
 
-import os
-import sys
-
-import datetime, time
-import requests
-import json
 import psycopg2
 import argparse
-# from matplotlib import *
+
 import matplotlib.pyplot as plt
 #matplotlib.rcParams["interactive"] = True
 
@@ -33,9 +27,6 @@ ALTA_HOST_DEV = "http://localhost:8000/altapi"
 ALTA_HOST_TEST = "http://alta-sys.astron.nl/altapi"
 ALTA_HOST_ACC = "https://alta-acc.astron.nl/altapi"
 ALTA_HOST_PROD = "https://alta.astron.nl/altapi"
-
-# from atdb_services import atdb_io
-# from atdb_services.service_add_dataproduct import do_add_dataproduct, do_add_dataproducts
 
 DJANGO_DATETIME_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
 
@@ -128,8 +119,6 @@ def connect_to_database_example(host):
     database = "atdb"
     user = "atdbread"
     password = "atdbread123"
-    user = "dbadmin"
-    password = "dbadmin123"
 
     connection = None
 
