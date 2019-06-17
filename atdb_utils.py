@@ -239,9 +239,12 @@ def change_status(taskID,status):
 
 @timeit
 def set_ingest_progress(taskID,progress):
+    # example : progress = '80.03% done, ETA to finish: 0.07 hr'
     print('set_ingest_progress('+taskID+','+progress+')')
 
     ATDB_HOST = "http://atdb-test.astron.nl/atdb"
+    taskID = 190503009
+    progress = "80.03% done, ETA to finish: 0.07 hr"
 
     from atdb_interface.atdb_interface import ATDB
     atdb_interface = ATDB(ATDB_HOST)
