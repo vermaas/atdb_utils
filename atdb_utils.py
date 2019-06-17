@@ -236,6 +236,18 @@ def change_status(taskID,status):
     # atdb_service = atdb_io.ATDB_IO(atdb_io.ATDB_HOST_VM, '', '', '', '', False, False, False)
     # atdb_service.do_change_status('observations','taskid:190405034','aborted (reason)')
 
+
+@timeit
+def set_ingest_progress(taskID,progress):
+    print('set_ingest_progress('+taskID+','+progress+')')
+
+    ATDB_HOST = "http://atdb-test.astron.nl/atdb"
+
+    from atdb_interface.atdb_interface import ATDB
+    atdb_interface = ATDB(ATDB_HOST)
+    atdb_interface.do_PUT(key='observations:control_parameters', taskid=taskID,value=progress)
+
+
 @timeit
 def list_observations(status):
     print('list_observations('+status+')')
@@ -412,6 +424,7 @@ def main():
                         help="Optional taskID which can be used instead of '--id' to lookup Observations or Dataproducts.")
     parser.add_argument("--taskid_start", nargs="?", default=None)
     parser.add_argument("--taskid_end", nargs="?", default=None)
+    parser.add_argument("--value", nargs="?", default=None)
     parser.add_argument("--status",
                         default="valid",
                         help="status to be set by the set-status operation")
@@ -459,6 +472,10 @@ def main():
 
     if (args.operation=='change_status'):
         change_status(args.taskid, args.status)
+        return
+
+    if (args.operation=='set_ingest_progress'):
+        set_ingest_progress(args.taskid, args.value)
         return
 
 if __name__ == "__main__":
